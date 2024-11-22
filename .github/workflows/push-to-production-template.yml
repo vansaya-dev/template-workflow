@@ -1,0 +1,30 @@
+name: Reusable Push to Production
+
+on:
+  workflow_call:
+    inputs:
+      prod_repo:
+        description: "Production repository name"
+        required: true
+        type: string
+
+jobs:
+  push-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Push to Production
+        env:
+          PROD_TOKEN: ${{ secrets.PRODUCTION_PAT }}
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          
+          # Add the production repo as a remote
+          git remote add production https://x-access-token:${PROD_TOKEN}@github.com/vansaya/${{ inputs.prod_repo }}
+          
+          # Push the code to the main branch of the production repo
+          git push -u production main
