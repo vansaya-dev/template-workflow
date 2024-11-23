@@ -21,8 +21,8 @@ jobs:
           PROD_TOKEN: ${{ secrets.PRODUCTION_PAT }}
           PROD_REPO: ${{ inputs.prod_repo }}
         run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
+          git config --global user.name "Tosmim"
+          git config --global user.email "tosmimforidmehtab@gmail.com"
           
           # Add the production repo as a remote
           git remote add production https://x-access-token:${PROD_TOKEN}@github.com/vansaya/$PROD_REPO
