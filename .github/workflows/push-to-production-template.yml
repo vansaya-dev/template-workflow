@@ -19,6 +19,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Log Repository URL
+        env:
+          PROD_TOKEN: ${{ secrets.PRODUCTION_PAT }}
+          PROD_REPO: ${{ inputs.prod_repo }}
+        run: |
+          echo "Remote URL: https://x-access-token:${PROD_TOKEN}@github.com/vansaya/$PROD_REPO.git"
+
+
       - name: Push to Production
         env:
           PROD_TOKEN: ${{ secrets.PRODUCTION_PAT }}
