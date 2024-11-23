@@ -25,7 +25,7 @@ jobs:
           git config --global user.email "tosmimforidmehtab@gmail.com"
           
           # Add the production repo as a remote
-          git remote add production https://x-access-token:${PROD_TOKEN}@github.com/vansaya/$PROD_REPO
+          git remote add production https://x-access-token:${PROD_TOKEN}@github.com/vansaya/$PROD_REPO.git
           
           # Push the code to the main branch of the production repo
           git push -u production main
