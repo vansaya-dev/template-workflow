@@ -12,6 +12,9 @@ jobs:
   push-code:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -21,11 +24,14 @@ jobs:
           PROD_TOKEN: ${{ secrets.PRODUCTION_PAT }}
           PROD_REPO: ${{ inputs.prod_repo }}
         run: |
-          git config --global user.name "Tosmim"
-          git config --global user.email "tosmimforidmehtab@gmail.com"
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
           
-          # Add the production repo as a remote
+          # Add the production repo as a remote using the token
           git remote add production https://x-access-token:${PROD_TOKEN}@github.com/vansaya/$PROD_REPO.git
+          
+          # Fetch the main branch to ensure it exists
+          git fetch production main || echo "Main branch does not exist yet"
           
           # Push the code to the main branch of the production repo
           git push -u production main
